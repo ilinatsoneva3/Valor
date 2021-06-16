@@ -17,5 +17,12 @@ namespace IT.Valor.Infrastructure.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>(e => { e.ToTable(name: "ApplicationUsers"); });
+        }
     }
 }
