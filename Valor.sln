@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{08540DD6-4598-4AF4-B643-A25F7AC6E730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Valor.Server", "IT.Valor\Server\IT.Valor.Server.csproj", "{C1991258-99D0-455E-99F0-FC2D7317AAC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Server", "IT.Valor\Server\IT.Valor.Server.csproj", "{C1991258-99D0-455E-99F0-FC2D7317AAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Valor.Client", "IT.Valor\Client\IT.Valor.Client.csproj", "{D88D735A-CBDD-4F1A-BBD9-21C8E249F78C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Client", "IT.Valor\Client\IT.Valor.Client.csproj", "{D88D735A-CBDD-4F1A-BBD9-21C8E249F78C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Valor.Shared", "IT.Valor\Shared\IT.Valor.Shared.csproj", "{D575ACB9-EF34-4AE6-B369-996F116F40FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Shared", "IT.Valor\Shared\IT.Valor.Shared.csproj", "{D575ACB9-EF34-4AE6-B369-996F116F40FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Valor.Infrastructure", "IT.Valor.Infrastructure\IT.Valor.Infrastructure.csproj", "{7C47A980-1886-42F8-BF72-7F22ADBEF027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Infrastructure", "IT.Valor.Infrastructure\IT.Valor.Infrastructure.csproj", "{7C47A980-1886-42F8-BF72-7F22ADBEF027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Valor.Core", "IT.Valor.Core\IT.Valor.Core.csproj", "{4A2917B4-67CC-4B40-9469-B84D9EA4C37C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Core", "IT.Valor.Core\IT.Valor.Core.csproj", "{4A2917B4-67CC-4B40-9469-B84D9EA4C37C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
