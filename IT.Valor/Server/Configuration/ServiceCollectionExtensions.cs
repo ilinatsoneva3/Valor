@@ -9,6 +9,7 @@ namespace IT.Valor.Server.Configuration
         public static void AddBusinessServices(this IServiceCollection services)
         {
             services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

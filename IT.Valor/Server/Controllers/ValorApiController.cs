@@ -9,5 +9,6 @@ namespace IT.Valor.Server.Controllers
     [ApiController]
     public class ValorApiController : ControllerBase
     {
+
     }
 }

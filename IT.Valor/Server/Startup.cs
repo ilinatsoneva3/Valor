@@ -1,4 +1,7 @@
+using System.Reflection;
 using System.Text;
+using AutoMapper;
+using IT.Valor.Core.Mappings;
 using IT.Valor.Core.Models;
 using IT.Valor.Infrastructure.Data;
 using IT.Valor.Server.Configuration;
@@ -56,6 +59,8 @@ namespace IT.Valor.Server
                 });
 
             services.AddBusinessServices();
+
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserMappingProfile)));
 
             services.AddControllers();
         }

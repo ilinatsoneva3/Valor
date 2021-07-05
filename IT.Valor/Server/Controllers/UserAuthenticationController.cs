@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IT.Valor.Server.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class UserAuthenticationController : ValorApiController
     {
@@ -16,7 +17,6 @@ namespace IT.Valor.Server.Controllers
             _userAuthenticationService = userAuthenticationService;
         }
 
-        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<LoginResult> Login(UserCredentialsDto cred)
         {
@@ -24,8 +24,6 @@ namespace IT.Valor.Server.Controllers
             return result;
         }
 
-
-        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<LoginResult> Register(UserRegistrationDto registration)
         {
