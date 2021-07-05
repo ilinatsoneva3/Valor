@@ -7,6 +7,6 @@ namespace IT.Valor.Core.Interfaces.Services
     {
         Task<LoginResult> LoginUserAsync(UserCredentialsDto credentials);
 
-        Task<LoginResult> RegisterUserAsync(UserRegistrationDto credentials);
+        Task<LoginResult> RegisterUserAsync(UserRegistrationDto registration);
     }
 }

@@ -41,9 +41,37 @@ namespace IT.Valor.Core.Services
             return new LoginResult();
         }
 
-        public async Task<LoginResult> RegisterUserAsync(UserRegistrationDto credentials)
+        public async Task<LoginResult> RegisterUserAsync(UserRegistrationDto registration)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userExists = await _userManager.FindByEmailAsync(registration.Email);
+
+                if (userExists is not null)
+                {
+                    throw new ArgumentException("User with the same email already exists");
+                }
+
+                var newUser = new ApplicationUser
+                {
+                    FirstName = registration.FirstName,
+                    LastName = registration.LastName,
+                    Email = registration.Email
+                };
+
+                var result = await _userManager.CreateAsync(newUser);
+
+                if (result.Succeeded)
+                {
+                    return GetLoginResult(newUser);
+                }
+
+                return new LoginResult();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         private LoginResult GetLoginResult(ApplicationUser user)

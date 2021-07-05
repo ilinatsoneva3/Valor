@@ -27,9 +27,9 @@ namespace IT.Valor.Server.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<LoginResult> Register(UserRegistrationDto cred)
+        public async Task<LoginResult> Register(UserRegistrationDto registration)
         {
-            var result = await _userAuthenticationService.RegisterUserAsync(cred);
+            var result = await _userAuthenticationService.RegisterUserAsync(registration);
             return result;
         }
     }
