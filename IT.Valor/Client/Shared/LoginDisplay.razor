@@ -6,7 +6,7 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity.Name!</a>
+        <a href="authentication/profile">Hello, @UserName!</a>
         <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
     </Authorized>
     <NotAuthorized>
@@ -16,9 +16,24 @@
 </AuthorizeView>
 
 @code{
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    public string UserName { get; set; }
+
     private async Task BeginSignOut(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var AuthState = await authenticationStateTask;
+        var user = AuthState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            UserName = user.Identity.Name.Substring(0, user.Identity.Name.IndexOf("@"));
+        }
     }
 }

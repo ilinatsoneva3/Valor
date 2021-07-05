@@ -1,0 +1,28 @@
+﻿@page "/profile"
+
+<h3>Profile for @UserName</h3>
+<div>
+    <p>
+        User id is @Id
+    </p>
+</div>
+
+@code{
+    [CascadingParameter] Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    public string UserName { get; set; }
+
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var AuthState = await authenticationStateTask;
+        var user = AuthState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            UserName = user.Identity.Name.Substring(0, user.Identity.Name.IndexOf("@"));
+            Id = user.Claims.First(x => x.Type.Equals("sub")).Value;
+        }
+    }
+}
