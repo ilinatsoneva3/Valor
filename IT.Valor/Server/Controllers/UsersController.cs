@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using IT.Valor.Core.DataTransferObjects.User;
 using IT.Valor.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +12,14 @@ namespace IT.Valor.Server.Controllers
 
         public UsersController(IUserService userService)
         {
-            this._userService = userService;
+            _userService = userService;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<UserDto> GetUser([FromRoute] string id)
+        {
+            var result = await _userService.GetByUserIdAsync(id);
+            return result;
         }
     }
 }

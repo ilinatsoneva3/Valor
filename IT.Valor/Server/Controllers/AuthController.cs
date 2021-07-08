@@ -8,11 +8,11 @@ namespace IT.Valor.Server.Controllers
 {
     [AllowAnonymous]
     [Route("api/[controller]")]
-    public class UserAuthenticationController : ValorApiController
+    public class AuthController : ValorApiController
     {
         private readonly IUserAuthenticationService _userAuthenticationService;
 
-        public UserAuthenticationController(IUserAuthenticationService userAuthenticationService)
+        public AuthController(IUserAuthenticationService userAuthenticationService)
         {
             _userAuthenticationService = userAuthenticationService;
         }

@@ -9,6 +9,6 @@ namespace IT.Valor.Core.Interfaces.Services
 {
     public interface IUserService
     {
-        Task<UserDto> GetUserByIdAsync(string id);
+        Task<UserDto> GetByUserIdAsync(string id);
     }
 }

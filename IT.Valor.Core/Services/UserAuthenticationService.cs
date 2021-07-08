@@ -56,10 +56,11 @@ namespace IT.Valor.Core.Services
                 {
                     FirstName = registration.FirstName,
                     LastName = registration.LastName,
-                    Email = registration.Email
+                    Email = registration.Email,
+                    UserName = registration.Username
                 };
 
-                var result = await _userManager.CreateAsync(newUser);
+                var result = await _userManager.CreateAsync(newUser, registration.Password);
 
                 if (result.Succeeded)
                 {

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using IT.Valor.Core.DataTransferObjects.User;
+using IT.Valor.Core.Models;
 
 namespace IT.Valor.Core.Mappings
 {
@@ -6,6 +8,7 @@ namespace IT.Valor.Core.Mappings
     {
         public UserMappingProfile()
         {
+            CreateMap<ApplicationUser, UserDto>();
         }
     }
 }
