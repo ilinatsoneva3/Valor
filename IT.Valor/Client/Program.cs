@@ -1,6 +1,9 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
+using IT.Valor.Client.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,15 +18,21 @@ namespace IT.Valor.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddHttpClient("IT.Valor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-            // Supply HttpClient instances that include access tokens when making requests to the server project
-            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("IT.Valor.ServerAPI"));
-
-            builder.Services.AddApiAuthorization();
-
+            builder.Services.AddBlazoredLocalStorage();
+            builder.Services.AddOptions();
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+            builder.Services.AddScoped<IApiAuthenticationStateProvider, ApiAuthenticationStateProvider>();
             builder.Services.AddTelerikBlazor();
+
+            //builder.Services.AddHttpClient("IT.Valor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+            //    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            //// Supply HttpClient instances that include access tokens when making requests to the server project
+            //builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("IT.Valor.ServerAPI"));
+
+            //builder.Services.AddApiAuthorization();
+
 
             await builder.Build().RunAsync();
         }

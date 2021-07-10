@@ -3,6 +3,7 @@ using IT.Valor.Core.DataTransferObjects.UserAuthentication;
 using IT.Valor.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using LoginResult = IT.Valor.Core.DataTransferObjects.UserAuthentication.LoginResult;
 
 namespace IT.Valor.Server.Controllers
 {
