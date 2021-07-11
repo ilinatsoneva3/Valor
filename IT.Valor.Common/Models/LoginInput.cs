@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IT.Valor.Core.DataTransferObjects.UserAuthentication
+namespace IT.Valor.Common.Models
 {
     public class LoginInput
     {

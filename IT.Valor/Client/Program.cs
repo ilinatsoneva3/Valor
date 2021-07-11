@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using IT.Valor.Client.Services;
+using IT.Valor.Common.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -23,6 +24,8 @@ namespace IT.Valor.Client
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
             builder.Services.AddScoped<IApiAuthenticationStateProvider, ApiAuthenticationStateProvider>();
+            builder.Services.AddScoped<ICustomHttpClient, CustomHttpClient>();
+            builder.Services.AddScoped<IClientUserService, ClientUserService>();
             builder.Services.AddTelerikBlazor();
 
             //builder.Services.AddHttpClient("IT.Valor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
