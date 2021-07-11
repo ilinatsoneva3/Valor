@@ -9,5 +9,11 @@ namespace IT.Valor.Client
         event EventHandler<UserAuthenticatedArgs> UserAuthenticatedEvent;
 
         Task<UserDto> GetUserAsync(string id);
+
+        Task<LoginInput> LoginUser(Credentials user);
+
+        Task LogOutUser();
+
+        Task<LoginInput> RegisterUser(UserRegistration user);
     }
 }
