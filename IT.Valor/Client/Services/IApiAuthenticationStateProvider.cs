@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using IT.Valor.Core.DataTransferObjects.UserAuthentication;
+using IT.Valor.Common.Models;
 
 namespace IT.Valor.Client.Services
 {
