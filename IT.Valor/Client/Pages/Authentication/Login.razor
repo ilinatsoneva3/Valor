@@ -1,0 +1,65 @@
+﻿@page "/login"
+@inject IClientUserService UserService
+@inject NavigationManager Navigation
+
+@using Microsoft.AspNetCore.WebUtilities
+
+@if (showLogin)
+{
+    <EditForm Model="@user" OnValidSubmit="@LoginUser">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row form-group">
+            <div class="col-6">
+                <input class="form-control" type="text" @bind-value="@user.Username" placeholder="Username" />
+            </div>
+            <div class="col-6">
+                <input class="form-control" type="password" @bind-value="@user.Password" placeholder="Password" />
+            </div>
+        </div>
+        <div class="row form-grou">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+    </EditForm>
+}
+else
+{
+    <p>Authorizing</p>
+}
+
+
+@code{
+    private bool showLogin = true;
+    private string returnUrl = string.Empty;
+    Credentials user = new Credentials();
+
+    private async Task LoginUser()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var param))
+        {
+            returnUrl = param.First();
+        }
+
+        var login = UserService.LoginUser(user);
+        showLogin = false;
+        var result = await login;
+
+        if (string.IsNullOrEmpty(result.Token))
+        {
+            showLogin = true;
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                Navigation.NavigateTo(returnUrl);
+            }
+        }
+    }
+}

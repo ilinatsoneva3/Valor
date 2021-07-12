@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Core", "IT.Valor.Core\IT.Valor.Core.csproj", "{4A2917B4-67CC-4B40-9469-B84D9EA4C37C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT.Valor.Common", "IT.Valor.Common\IT.Valor.Common.csproj", "{0D84303D-36B8-46C3-ADC5-8E55FCF33526}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT.Valor.Common", "IT.Valor.Common\IT.Valor.Common.csproj", "{0D84303D-36B8-46C3-ADC5-8E55FCF33526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

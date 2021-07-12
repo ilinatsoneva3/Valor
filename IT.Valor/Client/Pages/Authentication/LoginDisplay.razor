@@ -1,0 +1,27 @@
+﻿@inject CurrentUser User
+@inject IClientUserService UserService
+
+<AuthorizeView>
+    <Authorized>
+        <a href="#">
+            Welcome, @User.User.FirstName !
+        </a>
+        <a href="logout">Log out</a>
+    </Authorized>
+    <NotAuthorized>
+        <a href="login">Log in</a>
+        <a href="register">Register</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    protected override void OnInitialized()
+    {
+        User.PropertyChanged += UserInfoChanged;
+    }
+
+    private void UserInfoChanged(object sender, EventArgs events)
+    {
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,64 @@
+﻿@page "/register"
+@inject IClientUserService UserService
+@inject NavigationManager Navigation
+
+
+@if (showRegistration)
+{
+<EditForm Model="@user" OnValidSubmit="@Register">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row form-group">
+        <div class="col-6">
+            <input class="form-control" type="text" @bind-value="@user.FirstName" placeholder="First Name" />
+        </div>
+        <div class="col-6">
+            <input class="form-control" type="text" @bind-value="@user.LastName" placeholder="Last Name" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-6">
+            <input class="form-control" type="text" @bind-value="@user.Username" placeholder="Username" />
+        </div>
+        <div class="col-6">
+            <input class="form-control" type="email" @bind-value="@user.Email" placeholder="Email" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-6">
+            <input class="form-control" type="password" @bind-value="@user.Password" placeholder="Password" />
+        </div>
+        <div class="col-6">
+            <input class="form-control" type="password" @bind-value="@user.ConfirmPassword" placeholder="Confirm password" />
+        </div>
+    </div>
+    <div class="row form-grou">
+        <button class="btn btn-primary" type="submit">Register</button>
+    </div>
+</EditForm>
+}
+else
+{
+    <p>Registering...</p>
+}
+
+@code{
+    private UserRegistration user = new UserRegistration();
+    private bool showRegistration = true;
+
+    private async Task Register()
+    {
+        var result = UserService.RegisterUser(user);
+        showRegistration = false;
+        var loginResult = await result;
+
+        if (string.IsNullOrEmpty(loginResult.Token))
+        {
+            showRegistration = true;
+        }
+        else
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+}
