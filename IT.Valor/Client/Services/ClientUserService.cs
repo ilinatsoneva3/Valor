@@ -11,10 +11,10 @@ namespace IT.Valor.Client
     {
         public event EventHandler<UserAuthenticatedArgs> UserAuthenticatedEvent;
 
-        private readonly ICustomHttpClient _httpClient;
+        private readonly IGenericRepository _httpClient;
         private readonly AuthenticationStateProvider _authProvider;
 
-        public ClientUserService(ICustomHttpClient httpClient,
+        public ClientUserService(IGenericRepository httpClient,
             AuthenticationStateProvider authProvider)
         {
             _httpClient = httpClient;

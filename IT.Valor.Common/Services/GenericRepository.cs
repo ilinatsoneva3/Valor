@@ -7,19 +7,19 @@ using IT.Valor.Common.Helpers;
 
 namespace IT.Valor.Common.Services
 {
-    public class CustomHttpClient : ICustomHttpClient
+    public class GenericRepository : IGenericRepository
     {
         private readonly HttpClient _htppClient;
         private string _token = "";
 
-        public CustomHttpClient(HttpClient httpClient)
+        public GenericRepository(HttpClient httpClient)
         {
             _htppClient = httpClient;
         }
 
         public void SetToken(string token)
         {
-            if (string.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(token))
             {
                 _token = token;
             }

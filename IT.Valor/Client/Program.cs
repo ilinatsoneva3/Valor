@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using IT.Valor.Client.Services;
@@ -21,18 +22,16 @@ namespace IT.Valor.Client
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
             builder.Services.AddScoped<IApiAuthenticationStateProvider, ApiAuthenticationStateProvider>();
-            builder.Services.AddScoped<ICustomHttpClient, CustomHttpClient>();
             builder.Services.AddScoped<IClientUserService, ClientUserService>();
             builder.Services.AddScoped<CurrentUser>();
-            builder.Services.AddTelerikBlazor();
+            builder.Services.AddScoped<IGenericRepository, GenericRepository>();
 
-            builder.Services.AddHttpClient("IT.Valor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            builder.Services.AddSingleton(
+                new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            //builder.Services.AddHttpClient("IT.Valor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
-            //// Supply HttpClient instances that include access tokens when making requests to the server project
+            ////// Supply HttpClient instances that include access tokens when making requests to the server project
             //builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("IT.Valor.ServerAPI"));
-
-            //builder.Services.AddApiAuthorization();
-
 
             await builder.Build().RunAsync();
         }

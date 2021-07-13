@@ -15,10 +15,10 @@ namespace IT.Valor.Client.Services
         private bool firstTime = true;
 
         private readonly ILocalStorageService _localStorageService;
-        private readonly ICustomHttpClient _httpClient;
+        private readonly IGenericRepository _httpClient;
 
         public ApiAuthenticationStateProvider(ILocalStorageService localStorageService,
-            ICustomHttpClient httpClient)
+            IGenericRepository httpClient)
         {
             _localStorageService = localStorageService;
             _httpClient = httpClient;

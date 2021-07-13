@@ -18,8 +18,6 @@ namespace IT.Valor.Client.Services
 
         public UserDto User { get; set; } = new UserDto();
 
-        public int Counter { get; set; }
-
         private async void UserAuthenticatedEvent(object sender, UserAuthenticatedArgs e)
         {
             if (!string.IsNullOrEmpty(e.UserId))
@@ -35,7 +33,6 @@ namespace IT.Valor.Client.Services
         private async void ClearUser()
         {
             User = new UserDto();
-            Counter = 0;
             NotifyPropertyChange();
         }
 

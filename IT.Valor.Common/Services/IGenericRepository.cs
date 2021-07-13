@@ -2,7 +2,7 @@
 
 namespace IT.Valor.Common.Services
 {
-    public interface ICustomHttpClient
+    public interface IGenericRepository
     {
         Task DeleteAsync<T>(string uri);
 
