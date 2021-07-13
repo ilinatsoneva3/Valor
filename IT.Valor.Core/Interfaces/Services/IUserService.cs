@@ -10,5 +10,7 @@ namespace IT.Valor.Core.Interfaces.Services
     public interface IUserService
     {
         Task<UserDto> GetByUserIdAsync(string id);
+
+        Task<UserDto> GetCurrentUserAsync();
     }
 }

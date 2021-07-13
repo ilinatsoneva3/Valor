@@ -1,10 +1,12 @@
 using System.Reflection;
 using System.Text;
 using AutoMapper;
+using IT.Valor.Core.Interfaces;
 using IT.Valor.Core.Mappings;
 using IT.Valor.Core.Models;
 using IT.Valor.Infrastructure.Data;
 using IT.Valor.Server.Configuration;
+using IT.Valor.Server.Http;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,6 +61,7 @@ namespace IT.Valor.Server
                 });
 
             services.AddBusinessServices();
+            services.AddScoped<ICustomHttpContext, CustomHttpContext>();
 
             services.AddAutoMapper(Assembly.GetAssembly(typeof(UserMappingProfile)));
 

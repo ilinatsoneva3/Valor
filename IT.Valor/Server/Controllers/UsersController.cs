@@ -21,5 +21,12 @@ namespace IT.Valor.Server.Controllers
             var result = await _userService.GetByUserIdAsync(id);
             return result;
         }
+
+        [HttpGet("me")]
+        public async Task<UserDto> GetUser()
+        {
+            var result = await _userService.GetCurrentUserAsync();
+            return result;
+        }
     }
 }
