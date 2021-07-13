@@ -28,10 +28,6 @@ namespace IT.Valor.Client
 
             builder.Services.AddSingleton(
                 new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            //builder.Services.AddHttpClient("IT.Valor.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-
-            ////// Supply HttpClient instances that include access tokens when making requests to the server project
-            //builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("IT.Valor.ServerAPI"));
 
             await builder.Build().RunAsync();
         }
