@@ -3,15 +3,11 @@ using IT.Valor.Core.Interfaces.Entities;
 
 namespace IT.Valor.Core.Models
 {
-    public class Quote : IAddedEntity, IModifiedEntity
+    public class Quote : BaseEntity
     {
         public Guid Id { get; set; }
 
         public string Content { get; set; }
-
-        public DateTime AddedOn { get; set; }
-
-        public DateTime ModifiedOn { get; set; }
 
         public string AddedById { get; set; }
 
@@ -24,5 +20,9 @@ namespace IT.Valor.Core.Models
         public Guid? AuthorId { get; set; }
 
         public Author Author { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
+        public DateTime DateModified { get; set; }
     }
 }

@@ -5,13 +5,9 @@ using IT.Valor.Core.Interfaces.Entities;
 
 namespace IT.Valor.Core.Models
 {
-    public class Book : IAddedEntity, IModifiedEntity
+    public class Book : BaseEntity
     {
         public Guid Id { get; set; }
-
-        public DateTime AddedOn { get; set; }
-
-        public DateTime ModifiedOn { get; set; }
 
         public string Title { get; set; }
 
@@ -22,5 +18,9 @@ namespace IT.Valor.Core.Models
         public Author Author { get; set; }
 
         public IEnumerable<Quote> Quotes { get; set; } = Enumerable.Empty<Quote>();
+
+        public DateTime DateCreated { get; set; }
+
+        public DateTime DateModified { get; set; }
     }
 }

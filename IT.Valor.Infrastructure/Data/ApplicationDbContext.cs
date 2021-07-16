@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using IT.Valor.Core.Interfaces.Entities;
 using IT.Valor.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,6 +28,27 @@ namespace IT.Valor.Infrastructure.Data
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             ConfigureDefaultIdentityTables(builder);
+        }
+
+       public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is BaseEntity && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((BaseEntity)entityEntry.Entity).DateModified = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entityEntry.Entity).DateCreated = DateTime.Now;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         private void ConfigureDefaultIdentityTables(ModelBuilder builder)
