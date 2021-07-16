@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer4.EntityFramework.Options;
 using IT.Valor.Core.Models;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace IT.Valor.Infrastructure.Data
 {
@@ -18,10 +13,26 @@ namespace IT.Valor.Infrastructure.Data
         {
         }
 
+        public DbSet<Quote> Quotes { get; set; }
+
+        public DbSet<Book> Books { get; set; }
+
+        public DbSet<Author> Author { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-            //builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+            ConfigureDefaultIdentityTables(builder);
+        }
+
+        private void ConfigureDefaultIdentityTables(ModelBuilder builder)
+        {
+            builder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            builder.Entity<IdentityUserToken<string>>().HasNoKey();
+            builder.Entity<IdentityUserClaim<string>>().HasKey(x => new { x.Id, x.UserId });
+            builder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.RoleId, x.UserId } );
+
         }
     }
 }
