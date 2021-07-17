@@ -9,12 +9,13 @@ namespace IT.Valor.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<Author> builder)
         {
             builder.Property(a => a.FirstName)
-                .IsRequired()
                 .HasMaxLength(64);
 
             builder.Property(a => a.LastName)
-                .IsRequired()
                 .HasMaxLength(64);
+
+            builder.Property(a => a.Pseudonym)
+               .HasMaxLength(64);
 
             builder.HasMany(a => a.Books)
                 .WithOne(b => b.Author)

@@ -61,6 +61,7 @@ namespace IT.Valor.Server
                 });
 
             services.AddBusinessServices();
+            services.AddRepositories();
             services.AddScoped<ICustomHttpContext, CustomHttpContext>();
 
             services.AddAutoMapper(Assembly.GetAssembly(typeof(UserMappingProfile)));

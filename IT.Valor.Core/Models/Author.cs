@@ -15,6 +15,8 @@ namespace IT.Valor.Core.Models
 
         public string LastName { get; set; }
 
+        public string Pseudonym { get; set; }
+
         public DateTime? YearBorn { get; set; }
 
         public IEnumerable<Book> Books { get; set; } = Enumerable.Empty<Book>();

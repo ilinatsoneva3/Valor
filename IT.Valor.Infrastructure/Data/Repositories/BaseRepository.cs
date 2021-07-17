@@ -11,14 +11,14 @@ namespace IT.Valor.Infrastructure.Data.Repositories
     public class BaseRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : class
     {
-        private readonly DbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public BaseRepository(DbContext dbContext)
+        public BaseRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public ApplicationDbContext Context => _dbContext as ApplicationDbContext;
+        public ApplicationDbContext Context => _dbContext;
 
         public async Task<TEntity> GetByIdAsync(string id)
             => await Context.Set<TEntity>().FindAsync(id);
