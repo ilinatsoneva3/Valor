@@ -17,7 +17,7 @@ namespace IT.Valor.Core.Models
 
         public Author Author { get; set; }
 
-        public IEnumerable<Quote> Quotes { get; set; } = Enumerable.Empty<Quote>();
+        public IEnumerable<Quote> Quotes { get; set; } = new HashSet<Quote>();
 
         public DateTime DateCreated { get; set; }
 

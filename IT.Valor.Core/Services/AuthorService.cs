@@ -49,8 +49,8 @@ namespace IT.Valor.Core.Services
 
             var author = lastName switch
             {
-                null => await _authorRepository.FindAsync(a => a.Pseudonym == firstName),
-                _ => await _authorRepository.FindAsync(a => a.FirstName == firstName && a.LastName == lastName)
+                null => await _authorRepository.FirstOrDefaultAsync(a => a.Pseudonym == firstName),
+                _ => await _authorRepository.FirstOrDefaultAsync(a => a.FirstName == firstName && a.LastName == lastName)
             };
 
             return _mapper.Map<AuthorDto>(author);
@@ -58,7 +58,7 @@ namespace IT.Valor.Core.Services
 
         private void EnsureAuthorHasNameProvided(string name)
         {
-            if (!string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Name is required");
             }

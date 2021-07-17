@@ -10,7 +10,7 @@ namespace IT.Valor.Core.Helpers
             {
                 null => null,
                 "" => null,
-                _ => input.First().ToString().ToUpper() + input.Substring(1).ToLower()
+                _ => input.First().ToString().ToUpper() + input.Substring(1)
             };
     }
 }

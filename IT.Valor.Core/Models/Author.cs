@@ -19,9 +19,9 @@ namespace IT.Valor.Core.Models
 
         public DateTime? YearBorn { get; set; }
 
-        public IEnumerable<Book> Books { get; set; } = Enumerable.Empty<Book>();
+        public IEnumerable<Book> Books { get; set; } = new HashSet<Book>();
 
-        public IEnumerable<Quote> Quotes { get; set; } = Enumerable.Empty<Quote>();
+        public IEnumerable<Quote> Quotes { get; set; } = new HashSet<Quote>();
 
         public DateTime DateCreated { get; set; }
 

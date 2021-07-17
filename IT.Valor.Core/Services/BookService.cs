@@ -41,7 +41,7 @@ namespace IT.Valor.Core.Services
         {
             CheckIfAuthorIsNull(author);
 
-            var book = await _bookRepository.FindAsync(b => b.Title == name && b.AuthorId == author.Id);
+            var book = await _bookRepository.FirstOrDefaultAsync(b => b.Title == name && b.AuthorId == author.Id);
             return _mapper.Map<BookDto>(book);
         }
 

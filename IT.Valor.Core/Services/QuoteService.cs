@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using IT.Valor.Core.DataTransferObjects.Author;
 using IT.Valor.Core.DataTransferObjects.Book;
 using IT.Valor.Core.DataTransferObjects.Quotes;
@@ -16,16 +17,19 @@ namespace IT.Valor.Core.Services
         private readonly IAuthorService _authorService;
         private readonly IBookService _bookService;
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
         public QuoteService(IBaseRepository<Quote> quoteRepository,
             IAuthorService authorService,
             IBookService bookService,
-            IUserService userService)
+            IUserService userService,
+            IMapper mapper)
         {
             _quoteRepository = quoteRepository;
             _authorService = authorService;
             _bookService = bookService;
             _userService = userService;
+            _mapper = mapper;
         }
 
         public async Task<QuoteDto> CreateQuoteAsync(CreateQuoteDto request)
@@ -52,13 +56,7 @@ namespace IT.Valor.Core.Services
 
             await _quoteRepository.SaveChangesAsync();
 
-            return new QuoteDto
-            {
-                Id = newQuote.Id,
-                Content = newQuote.Content,
-                AuthorName = string.Concat(newQuote.Author?.FirstName, " ", newQuote.Author?.LastName),
-                BookTitle = newQuote.Book?.Title
-            };
+            return _mapper.Map<QuoteDto>(newQuote);
         }
 
         private async Task<AuthorDto> GetAuthorIfExisting(CreateQuoteDto request)
@@ -77,7 +75,7 @@ namespace IT.Valor.Core.Services
 
         private async Task<BookDto> GetBookAsync(string name, AuthorDto author)
         {
-            if (!string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 return null;
             }
@@ -94,6 +92,10 @@ namespace IT.Valor.Core.Services
 
         private string EnsureValidName(string name)
         {
+            if (name is null)
+            {
+                return null;
+            }
             var trimmedName = name.Trim();
             return StringHelper.FirstLetterToUpper(trimmedName);
         }

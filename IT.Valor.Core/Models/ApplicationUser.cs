@@ -10,6 +10,6 @@ namespace IT.Valor.Core.Models
 
         public string LastName { get; set; }
 
-        public IEnumerable<Quote> Quotes { get; set; } = Enumerable.Empty<Quote>();
+        public IEnumerable<Quote> Quotes { get; set; } = new HashSet<Quote>();
     }
 }
