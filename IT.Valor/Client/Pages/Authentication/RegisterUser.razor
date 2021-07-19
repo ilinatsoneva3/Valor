@@ -10,25 +10,31 @@
     <ValidationSummary />
     <div class="row form-group">
         <div class="col-6">
+            <label>First name</label>
             <input class="form-control" type="text" @bind-value="@user.FirstName" placeholder="First Name" />
         </div>
         <div class="col-6">
+            <label>Last name</label>
             <input class="form-control" type="text" @bind-value="@user.LastName" placeholder="Last Name" />
         </div>
     </div>
     <div class="row form-group">
         <div class="col-6">
+            <label>Username</label>
             <input class="form-control" type="text" @bind-value="@user.Username" placeholder="Username" />
         </div>
         <div class="col-6">
+            <label>Email</label>
             <input class="form-control" type="email" @bind-value="@user.Email" placeholder="Email" />
         </div>
     </div>
     <div class="row form-group">
         <div class="col-6">
+            <label>Password</label>
             <input class="form-control" type="password" @bind-value="@user.Password" placeholder="Password" />
         </div>
         <div class="col-6">
+            <label>Confirm password</label>
             <input class="form-control" type="password" @bind-value="@user.ConfirmPassword" placeholder="Confirm password" />
         </div>
     </div>
