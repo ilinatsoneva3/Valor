@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using IT.Valor.Core.DataTransferObjects.Author;
@@ -57,6 +58,24 @@ namespace IT.Valor.Core.Services
             await _quoteRepository.SaveChangesAsync();
 
             return _mapper.Map<QuoteDto>(newQuote);
+        }
+
+        public async Task<QuoteStatsOverviewDto> GetStatsAsync()
+        {
+            var currentUser = await _userService.GetCurrentUserAsync();
+
+            var allQuotes = await _quoteRepository.GetAllAsync();
+            var userQuotes = allQuotes.Where(q => q.AddedById == currentUser.Id);
+
+            var rand = new Random();
+
+            return new QuoteStatsOverviewDto
+            {
+                TotalQuotes = allQuotes.Count(),
+                UserQuotes = userQuotes.Count(),
+                RandomQuote = _mapper.Map<QuoteDto>(allQuotes.OrderBy(x => rand.NextDouble()).First()),
+                UserRandomQuote = _mapper.Map<QuoteDto>(userQuotes?.OrderBy(x => rand.NextDouble()).First())
+            };
         }
 
         private async Task<AuthorDto> GetAuthorIfExisting(CreateQuoteDto request)

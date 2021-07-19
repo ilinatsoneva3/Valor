@@ -15,6 +15,13 @@ namespace IT.Valor.Server.Controllers
             _quoteService = quoteService;
         }
 
+        [HttpGet]
+        public async Task<QuoteStatsOverviewDto> GetQuotesOverviewAsync()
+        {
+            var result = await _quoteService.GetStatsAsync();
+            return result;
+        }
+
         [HttpPost]
         public async Task<QuoteDto> CreateQuoteAsync([FromBody] CreateQuoteDto request)
         {

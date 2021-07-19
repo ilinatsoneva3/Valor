@@ -1,4 +1,5 @@
 ﻿@page "/profile"
+@attribute [Authorize]
 @inject CurrentUser User
 
 <h3>Profile for @User.User.Email</h3>

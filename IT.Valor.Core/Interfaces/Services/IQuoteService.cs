@@ -6,5 +6,7 @@ namespace IT.Valor.Core.Interfaces.Services
     public interface IQuoteService
     {
         Task<QuoteDto> CreateQuoteAsync(CreateQuoteDto request);
+
+        Task<QuoteStatsOverviewDto> GetStatsAsync();
     }
 }

@@ -12,5 +12,6 @@ namespace IT.Valor.Core.DataTransferObjects.Quotes
 
         public string BookTitle { get; set; }
 
+        public DateTime DateCreated { get; set; }
     }
 }
