@@ -1,11 +1,49 @@
 ﻿@page "/"
 
+@using IT.Valor.Common.Models.Index
+
+@inject IApiClient Client
+@inject CurrentUser User
+
 <div class="header font-italic">
     <h1>Opportunities don't happen. You create them.</h1>
     <p>Welcome to your new world.</p>
 </div>
-<AuthorizeView>
-    <div>
-        <p>Authorized users only</p>
+@if (User.User.IsAuthenticated)
+{
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text">Total quotes: @Stats.TotalQuotes</p>
+            <p class="card-text">Your quotes: @Stats.UserQuotes</p>
+        </div>
     </div>
-</AuthorizeView>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Stats.UserRandomQuote.AuthorName</h5>
+            @if (Stats.UserRandomQuote.BookTitle is not null)
+            {
+                <h6 class="card-subtitle">@Stats.UserRandomQuote.BookTitle</h6>
+            }
+            <p class="card-text">@Stats.UserRandomQuote.Content</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Stats.RandomQuote.AuthorName</h5>
+            @if (Stats.RandomQuote.BookTitle is not null)
+            {
+                <h6 class="card-subtitle">@Stats.RandomQuote.BookTitle</h6>
+            }
+            <p class="card-text">@Stats.RandomQuote.Content</p>
+        </div>
+    </div>
+}
+
+@code{
+    public QuoteStatsDto Stats { get; set; } = new QuoteStatsDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Stats = await Client.GetStatsAsync();
+    }
+}

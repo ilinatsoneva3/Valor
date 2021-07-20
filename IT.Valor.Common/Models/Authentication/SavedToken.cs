@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace IT.Valor.Common.Models
+namespace IT.Valor.Common.Models.Authentication
 {
     public class SavedToken
     {

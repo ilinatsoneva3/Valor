@@ -1,4 +1,4 @@
-﻿namespace IT.Valor.Common.Models
+﻿namespace IT.Valor.Common.Models.Authentication
 {
     public class UserDto
     {
@@ -9,5 +9,7 @@
         public string LastName { get; set; }
 
         public string Email { get; set; }
+
+        public bool IsAuthenticated => Id != null;
     }
 }

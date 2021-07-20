@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using IT.Valor.Common.Helpers;
-using IT.Valor.Common.Models;
+using IT.Valor.Common.Models.Authentication;
 using IT.Valor.Common.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 

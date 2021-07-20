@@ -14,13 +14,13 @@ namespace IT.Valor.Core.Services
 {
     public class QuoteService : IQuoteService
     {
-        private readonly IBaseRepository<Quote> _quoteRepository;
+        private readonly IQuoteRepository _quoteRepository;
         private readonly IAuthorService _authorService;
         private readonly IBookService _bookService;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public QuoteService(IBaseRepository<Quote> quoteRepository,
+        public QuoteService(IQuoteRepository quoteRepository,
             IAuthorService authorService,
             IBookService bookService,
             IUserService userService,
@@ -64,7 +64,7 @@ namespace IT.Valor.Core.Services
         {
             var currentUser = await _userService.GetCurrentUserAsync();
 
-            var allQuotes = await _quoteRepository.GetAllAsync();
+            var allQuotes = await _quoteRepository.GetAllWithRelatedAsync();
             var userQuotes = allQuotes.Where(q => q.AddedById == currentUser.Id);
 
             var rand = new Random();

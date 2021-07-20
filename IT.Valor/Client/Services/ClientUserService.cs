@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IT.Valor.Client.Services;
-using IT.Valor.Common.Models;
+using IT.Valor.Common.Models.Authentication;
 using IT.Valor.Common.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 namespace IT.Valor.Client

@@ -23,6 +23,7 @@ namespace IT.Valor.Client
             builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
             builder.Services.AddScoped<IApiAuthenticationStateProvider, ApiAuthenticationStateProvider>();
             builder.Services.AddScoped<IClientUserService, ClientUserService>();
+            builder.Services.AddScoped<IApiClient, ApiClient>();
             builder.Services.AddScoped<CurrentUser>();
             builder.Services.AddScoped<IGenericRepository, GenericRepository>();
 

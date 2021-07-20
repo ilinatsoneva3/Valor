@@ -20,7 +20,7 @@ namespace IT.Valor.Server.Configuration
 
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IBaseRepository<Quote>, BaseRepository<Quote>>();
+            services.AddScoped<IQuoteRepository, QuoteRepository>();
             services.AddScoped<IBaseRepository<Book>, BaseRepository<Book>>();
             services.AddScoped<IBaseRepository<Author>, BaseRepository<Author>>();
         }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IT.Valor.Common.Models
+namespace IT.Valor.Common.Models.Authentication
 {
     public class UserRegistration
     {
