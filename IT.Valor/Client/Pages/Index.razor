@@ -5,42 +5,36 @@
 @inject IApiClient Client
 @inject CurrentUser User
 
-<div class="header font-italic">
+<div class="colored font-italic">
     <h1>Opportunities don't happen. You create them.</h1>
     <p>Welcome to your new world.</p>
 </div>
+<br />
+<br />
 @if (User.User.IsAuthenticated)
 {
-    <div class="card">
+    <h4 class="colored font-italic">Your random quote for today:</h4>
+    <div class="card backgroud-colored">
         <div class="card-body">
-            <p class="card-text">Total quotes: @Stats.TotalQuotes</p>
-            <p class="card-text">Your quotes: @Stats.UserQuotes</p>
+            <p class="card-text">@Stats.UserRandomQuote.Content</p>
+            <p class="text-muted font-italic">@Stats.UserRandomQuote.AuthorName, @Stats.UserRandomQuote.BookTitle</p>
         </div>
     </div>
-    <div class="card">
+
+    <br />
+    <br />
+
+    <h4 class="colored font-italic">Inspiration for today:</h4>
+    <div class="card backgroud-colored">
         <div class="card-body">
-            <h5 class="card-title">@Stats.UserRandomQuote?.AuthorName</h5>
-            @if (Stats.UserRandomQuote?.BookTitle is not null)
-            {
-                <h6 class="card-subtitle">@Stats.UserRandomQuote?.BookTitle</h6>
-            }
-            <p class="card-text">@Stats.UserRandomQuote?.Content</p>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">@Stats?.RandomQuote?.AuthorName</h5>
-            @if (Stats?.RandomQuote?.BookTitle is not null)
-            {
-                <h6 class="card-subtitle">@Stats?.RandomQuote?.BookTitle</h6>
-            }
-            <p class="card-text">@Stats?.RandomQuote?.Content</p>
+            <p class="card-text">@Stats.RandomQuote.Content</p>
+            <p class="text-muted font-italic">@Stats.RandomQuote.AuthorName, @Stats.RandomQuote.BookTitle</p>
         </div>
     </div>
 }
 
 @code{
-    public QuoteStatsDto Stats { get; set; } = new QuoteStatsDto();
+    private QuoteStatsDto Stats = new QuoteStatsDto();
 
     protected override async Task OnParametersSetAsync()
     {

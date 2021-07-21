@@ -6,8 +6,8 @@
 
         public int UserQuotes { get; set; }
 
-        public QuoteDto UserRandomQuote { get; set; }
+        public QuoteDto UserRandomQuote { get; set; } = new QuoteDto();
 
-        public QuoteDto RandomQuote { get; set; }
+        public QuoteDto RandomQuote { get; set; } = new QuoteDto();
     }
 }

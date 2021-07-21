@@ -8,7 +8,7 @@
 <EditForm Model="@user" OnValidSubmit="@Register">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="row form-group">
+    <div class="row form-group colored">
         <div class="col-6">
             <label>First name</label>
             <input class="form-control" type="text" @bind-value="@user.FirstName" placeholder="First Name" />
@@ -18,7 +18,7 @@
             <input class="form-control" type="text" @bind-value="@user.LastName" placeholder="Last Name" />
         </div>
     </div>
-    <div class="row form-group">
+    <div class="row form-group colored">
         <div class="col-6">
             <label>Username</label>
             <input class="form-control" type="text" @bind-value="@user.Username" placeholder="Username" />
@@ -28,7 +28,7 @@
             <input class="form-control" type="email" @bind-value="@user.Email" placeholder="Email" />
         </div>
     </div>
-    <div class="row form-group">
+    <div class="row form-group colored">
         <div class="col-6">
             <label>Password</label>
             <input class="form-control" type="password" @bind-value="@user.Password" placeholder="Password" />
@@ -38,7 +38,7 @@
             <input class="form-control" type="password" @bind-value="@user.ConfirmPassword" placeholder="Confirm password" />
         </div>
     </div>
-    <div class="row form-grou">
+    <div class="row form-group">
         <button class="btn btn-primary" type="submit">Register</button>
     </div>
 </EditForm>
