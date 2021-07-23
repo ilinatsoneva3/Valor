@@ -5,7 +5,7 @@
 @inject IApiClient Client
 @inject CurrentUser User
 
-<div class="colored font-italic">
+<div class="font-italic">
     <h1>Opportunities don't happen. You create them.</h1>
     <p>Welcome to your new world.</p>
 </div>
@@ -13,7 +13,7 @@
 <br />
 @if (User.User.IsAuthenticated)
 {
-    <h4 class="colored font-italic">Your random quote for today:</h4>
+    <h4 class="font-italic">Your random quote for today:</h4>
     <div class="card backgroud-colored">
         <div class="card-body">
             <p class="card-text">@Stats.UserRandomQuote.Content</p>
@@ -24,7 +24,7 @@
     <br />
     <br />
 
-    <h4 class="colored font-italic">Inspiration for today:</h4>
+    <h4 class="font-italic">Inspiration for today:</h4>
     <div class="card backgroud-colored">
         <div class="card-body">
             <p class="card-text">@Stats.RandomQuote.Content</p>

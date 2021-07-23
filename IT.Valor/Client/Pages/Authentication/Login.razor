@@ -10,16 +10,16 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="row form-group">
-            <div class="col-6 colored">
+            <div class="col-6">
                 <label>Username</label>
                 <input class="form-control" type="text" @bind-value="@user.Username" placeholder="Username" />
             </div>
-            <div class="col-6 colored">
+            <div class="col-6">
                 <label>Password</label>
                 <input class="form-control" type="password" @bind-value="@user.Password" placeholder="Password" />
             </div>
         </div>
-        <div class="row form-grou">
+        <div class="row form-group">
             <button class="btn btn-primary" type="submit">Login</button>
         </div>
     </EditForm>

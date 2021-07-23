@@ -1,16 +1,17 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-html, body {
+html, body, a {
     font-family: "Florence", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #490377;
 }
 
-a, .btn-link {
+.btn-link {
     color: #0366d6;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
+    background-color: #490377;
     border-color: #1861ac;
 }
 
