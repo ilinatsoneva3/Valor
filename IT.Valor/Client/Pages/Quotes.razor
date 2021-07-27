@@ -1,4 +1,5 @@
 ﻿@page "/quotes"
+@attribute [Authorize]
 
 @using IT.Valor.Client.Components
 @using IT.Valor.Common.Models.Index
@@ -18,10 +19,29 @@
         }
     </div>
 
-    @foreach (var q in quotes)
-    {
-        <p>@q.Content</p>
-    }
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Quote</th>
+                    <th scope="col">Author Name</th>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Date Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var quote in quotes)
+                {
+                    <tr>
+                        <th>@quote.Content</th>
+                        <td>@quote.AuthorName</td>
+                        <td>@quote.BookTitle</td>
+                        <td>@quote.DateCreated.Date.ToString("d")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @code{

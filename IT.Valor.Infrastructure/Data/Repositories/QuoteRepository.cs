@@ -24,6 +24,7 @@ namespace IT.Valor.Infrastructure.Data.Repositories
                     .Include(q => q.Book)
                     .Include(q => q.Author)
                     .Where(q => q.AddedById == userId)
+                    .OrderByDescending(q => q.DateCreated)
                     .ToListAsync();
     }
 }
