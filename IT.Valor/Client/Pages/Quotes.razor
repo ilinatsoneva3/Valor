@@ -1,0 +1,28 @@
+﻿@page "/quotes"
+
+@using IT.Valor.Client.Components
+
+@inject IApiClient Client
+
+<div class="font-italic">
+    <div>
+        <button type="button" class="btn btn-primary float-right" @onclick="ShowInputForm">Add new</button>
+        <br />
+        <br />
+        <br />
+
+        @if (showInput)
+        {
+            <QuoteComponent @bind-ShowArea="showInput"></QuoteComponent>
+        }
+    </div>
+</div>
+
+@code{
+    private bool showInput = false;
+
+    private void ShowInputForm()
+    {
+        showInput = !showInput;
+    }
+}
