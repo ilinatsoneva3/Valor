@@ -42,7 +42,7 @@ namespace IT.Valor.Core.Services
                 throw new ArgumentException("User must be logged in");
             }
 
-            var author = await GetAuthorIfExisting(request);
+            var author = await GetAuthorAsync(request);
             var book = await GetBookAsync(request.BookName, author);
 
             var newQuote = new Quote
@@ -78,7 +78,7 @@ namespace IT.Valor.Core.Services
             };
         }
 
-        private async Task<AuthorDto> GetAuthorIfExisting(CreateQuoteDto request)
+        private async Task<AuthorDto> GetAuthorAsync(CreateQuoteDto request)
         {
             var firstName = EnsureValidName(request.AuthorFirstName);
             var lastName = EnsureValidName(request.AuthorLastName);

@@ -1,0 +1,54 @@
+﻿@using IT.Valor.Common.Models.Index
+
+@inject IApiClient Client
+
+
+<EditForm Model="@quote" OnValidSubmit="@CreateQuote">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row form-group">
+        <div class="col-12">
+            <h5 class="font-italic">Enter text below:</h5>
+            <textarea class="form-control" type="text" @bind="@quote.Content" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-12">
+            <p class="font-italic">Book name</p>
+            <input class="form-control" type="text" @bind="@quote.BookName" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-6">
+            <p class="font-italic">First name</p>
+            <input class="form-control" type="text" @bind="@quote.AuthorFirstName" />
+        </div>
+        <div class="col-6">
+            <p class="font-italic">Last name</p>
+            <input class="form-control" type="text" @bind="@quote.AuthorLastName" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <button class="btn btn-primary" type="submit">Create</button>
+    </div>
+</EditForm>
+
+@code{
+    private bool showArea;
+
+    [Parameter]
+    public bool ShowArea { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ShowAreaChanged { get; set; }
+
+    private CreateQuoteDto quote = new CreateQuoteDto();
+
+    private async Task CreateQuote()
+    {
+        var result = Client.PostQuoteAsync(quote);
+        ShowArea = false;
+        var addedQuote = await result;
+        await ShowAreaChanged.InvokeAsync(ShowArea);
+    }
+}

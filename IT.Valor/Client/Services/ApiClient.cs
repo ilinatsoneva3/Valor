@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using IT.Valor.Common.Models.Index;
 using IT.Valor.Common.Services;
@@ -25,6 +23,19 @@ namespace IT.Valor.Client.Services
             catch (Exception)
             {
                 return new QuoteStatsDto();
+            }
+        }
+
+        public async Task<QuoteDto> PostQuoteAsync(CreateQuoteDto request)
+        {
+            try
+            {
+                return await _httpClient.PostAsync<CreateQuoteDto, QuoteDto>($"api/quotes", request);
+            }
+            catch (Exception)
+            {
+
+                return new QuoteDto();
             }
         }
     }
