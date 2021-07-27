@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using IT.Valor.Core.Common;
 using IT.Valor.Core.DataTransferObjects.Author;
 using IT.Valor.Core.DataTransferObjects.Book;
 using IT.Valor.Core.DataTransferObjects.Quotes;
@@ -61,13 +62,14 @@ namespace IT.Valor.Core.Services
             return _mapper.Map<QuoteDto>(newQuote);
         }
 
-        public async Task<IEnumerable<QuoteDto>> GetAllForUserAsync()
+        public async Task<PaginatedResult<QuoteDto>> GetAllForUserAsync(PageParameters parameters)
         {
             var currentUser = await _userService.GetCurrentUserAsync();
 
             var quotes = await _quoteRepository.GetForUserWithRealtedAsync(currentUser.Id);
+            var quotesDto = quotes.Select(q => _mapper.Map<QuoteDto>(q));
 
-            return quotes.Select(q => _mapper.Map<QuoteDto>(q));
+            return PaginatedResult<QuoteDto>.ToPaginatedResult(quotesDto, parameters.PageNumber, parameters.PageSize);
         }
 
         public async Task<QuoteStatsOverviewDto> GetStatsAsync()
