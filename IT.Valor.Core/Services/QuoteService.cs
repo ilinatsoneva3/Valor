@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -58,6 +59,15 @@ namespace IT.Valor.Core.Services
             await _quoteRepository.SaveChangesAsync();
 
             return _mapper.Map<QuoteDto>(newQuote);
+        }
+
+        public async Task<IEnumerable<QuoteDto>> GetAllForUserAsync()
+        {
+            var currentUser = await _userService.GetCurrentUserAsync();
+
+            var quotes = await _quoteRepository.GetForUserWithRealtedAsync(currentUser.Id);
+
+            return quotes.Select(q => _mapper.Map<QuoteDto>(q));
         }
 
         public async Task<QuoteStatsOverviewDto> GetStatsAsync()

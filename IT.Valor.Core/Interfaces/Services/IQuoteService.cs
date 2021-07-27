@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using IT.Valor.Core.DataTransferObjects.Quotes;
 
 namespace IT.Valor.Core.Interfaces.Services
@@ -8,5 +9,7 @@ namespace IT.Valor.Core.Interfaces.Services
         Task<QuoteDto> CreateQuoteAsync(CreateQuoteDto request);
 
         Task<QuoteStatsOverviewDto> GetStatsAsync();
+
+        Task<IEnumerable<QuoteDto>> GetAllForUserAsync();
     }
 }

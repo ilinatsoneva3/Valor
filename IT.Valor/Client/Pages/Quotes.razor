@@ -1,6 +1,7 @@
 ﻿@page "/quotes"
 
 @using IT.Valor.Client.Components
+@using IT.Valor.Common.Models.Index
 
 @inject IApiClient Client
 
@@ -13,13 +14,36 @@
 
         @if (showInput)
         {
-            <QuoteComponent @bind-ShowArea="showInput"></QuoteComponent>
+            <CascadingValue Value="this"><QuoteComponent @bind-ShowArea="showInput" /></CascadingValue>
         }
     </div>
+
+    @foreach (var q in quotes)
+    {
+        <p>@q.Content</p>
+    }
 </div>
 
 @code{
     private bool showInput = false;
+    private IEnumerable<QuoteDto> quotes = Enumerable.Empty<QuoteDto>();
+
+    public async Task RerenderTable()
+    {
+        await LoadQuotes();
+        StateHasChanged();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadQuotes();
+    }
+
+    private async Task LoadQuotes()
+    {
+
+        quotes = await Client.GetForUserAsync();
+    }
 
     private void ShowInputForm()
     {

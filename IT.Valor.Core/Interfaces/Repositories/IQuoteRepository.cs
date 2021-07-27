@@ -7,5 +7,7 @@ namespace IT.Valor.Core.Interfaces.Repositories
     public interface IQuoteRepository : IBaseRepository<Quote>
     {
         Task<IEnumerable<Quote>> GetAllWithRelatedAsync();
+
+        Task<IEnumerable<Quote>> GetForUserWithRealtedAsync(string userId);
     }
 }

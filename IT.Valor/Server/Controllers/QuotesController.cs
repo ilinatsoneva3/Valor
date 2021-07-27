@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using IT.Valor.Core.DataTransferObjects.Quotes;
 using IT.Valor.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,14 @@ namespace IT.Valor.Server.Controllers
         public async Task<QuoteStatsOverviewDto> GetQuotesOverviewAsync()
         {
             var result = await _quoteService.GetStatsAsync();
+            return result;
+        }
+
+        [HttpGet]
+        [Route("all")]
+        public async Task<IEnumerable<QuoteDto>> GetAllByUserAsync()
+        {
+            var result = await _quoteService.GetAllForUserAsync();
             return result;
         }
 

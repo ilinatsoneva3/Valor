@@ -1,4 +1,5 @@
-﻿@using IT.Valor.Common.Models.Index
+﻿@using IT.Valor.Client.Pages
+@using IT.Valor.Common.Models.Index
 
 @inject IApiClient Client
 
@@ -42,6 +43,9 @@
     [Parameter]
     public EventCallback<bool> ShowAreaChanged { get; set; }
 
+    [CascadingParameter]
+    public Quotes Quotes { get; set; }
+
     private CreateQuoteDto quote = new CreateQuoteDto();
 
     private async Task CreateQuote()
@@ -50,5 +54,6 @@
         ShowArea = false;
         var addedQuote = await result;
         await ShowAreaChanged.InvokeAsync(ShowArea);
+        await Quotes.RerenderTable();
     }
 }

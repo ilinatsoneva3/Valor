@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using IT.Valor.Common.Models.Index;
 using IT.Valor.Common.Services;
@@ -23,6 +25,18 @@ namespace IT.Valor.Client.Services
             catch (Exception)
             {
                 return new QuoteStatsDto();
+            }
+        }
+
+        public async Task<IEnumerable<QuoteDto>> GetForUserAsync()
+        {
+            try
+            {
+                return await _httpClient.GetAsync<IEnumerable<QuoteDto>>($"api/quotes/all");
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<QuoteDto>();
             }
         }
 

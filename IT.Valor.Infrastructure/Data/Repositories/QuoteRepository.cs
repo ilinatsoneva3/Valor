@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using IT.Valor.Core.Interfaces.Repositories;
 using IT.Valor.Core.Models;
@@ -20,5 +18,12 @@ namespace IT.Valor.Infrastructure.Data.Repositories
                 .Include(q => q.Book)
                 .Include(q => q.Author)
                 .ToListAsync();
+
+        public async Task<IEnumerable<Quote>> GetForUserWithRealtedAsync(string userId)
+            => await Context.Quotes
+                    .Include(q => q.Book)
+                    .Include(q => q.Author)
+                    .Where(q => q.AddedById == userId)
+                    .ToListAsync();
     }
 }
