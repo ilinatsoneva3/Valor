@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using IT.Valor.Common.Models.Index;
+﻿using System.Threading.Tasks;
+using IT.Valor.Common.Models;
+using IT.Valor.Common.Models.Quote;
 
 namespace IT.Valor.Client.Services
 {
@@ -10,6 +10,6 @@ namespace IT.Valor.Client.Services
 
         Task<QuoteDto> PostQuoteAsync(CreateQuoteDto request);
 
-        Task<IEnumerable<QuoteDto>> GetForUserAsync();
+        Task<PaginatedResult<QuoteDto>> GetForUserAsync(PageParameters parameters);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IT.Valor.Common.Models.Index
+namespace IT.Valor.Common.Models.Quote
 {
     public class QuoteDto
     {

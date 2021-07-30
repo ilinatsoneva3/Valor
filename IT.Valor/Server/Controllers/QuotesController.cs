@@ -30,7 +30,6 @@ namespace IT.Valor.Server.Controllers
         public async Task<PaginatedResult<QuoteDto>> GetAllByUserAsync([FromQuery] PageParameters parameters)
         {
             var result = await _quoteService.GetAllForUserAsync(parameters);
-            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(result.Metadata)); //TODO: check
             return result;
         }
 

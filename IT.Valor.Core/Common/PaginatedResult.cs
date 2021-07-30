@@ -4,22 +4,17 @@ using System.Linq;
 
 namespace IT.Valor.Core.Common
 {
-    public class PaginatedResult<T> : List<T>
+    public class PaginatedResult<T>
     {
-        public PaginatedResult(IEnumerable<T> items, int count, int pageNumber, int pageSize)
+        public PaginatedResult(IEnumerable<T> items, int count)
         {
-            Metadata = new Metadata
-            {
-                TotalCount = count,
-                CurrentPage = pageNumber,
-                PageSize = pageSize,
-                TotalPages = (int)Math.Ceiling(count / (double)pageSize)
-            };
-
-            AddRange(items);
+            Items = items;
+            TotalCount = count;
         }
 
-        public Metadata Metadata { get; set; }
+        public int TotalCount { get; set; }
+
+        public IEnumerable<T> Items { get; set; }
 
         public static PaginatedResult<T> ToPaginatedResult<T>(IEnumerable<T> source, int pageNumber, int pageSize)
         {
@@ -28,7 +23,7 @@ namespace IT.Valor.Core.Common
                 .Take(pageSize)
                 .ToList();
 
-            return new PaginatedResult<T>(items, count, pageNumber, pageSize);
+            return new PaginatedResult<T>(items, count);
         }
     }
 }

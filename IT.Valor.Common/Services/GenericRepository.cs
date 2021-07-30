@@ -1,9 +1,13 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using IT.Valor.Common.Helpers;
+using IT.Valor.Common.Models;
 
 namespace IT.Valor.Common.Services
 {
@@ -68,7 +72,9 @@ namespace IT.Valor.Common.Services
                 {
                     PropertyNameCaseInsensitive = true
                 };
+
                 jsonResult = await response.Content.ReadAsStringAsync();
+
                 return JsonSerializer.Deserialize<T>(jsonResult, options);
             }
 

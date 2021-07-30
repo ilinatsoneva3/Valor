@@ -2,7 +2,8 @@
 @attribute [Authorize]
 
 @using IT.Valor.Client.Components
-@using IT.Valor.Common.Models.Index
+@using IT.Valor.Common.Models
+@using IT.Valor.Common.Models.Quote
 
 @inject IApiClient Client
 
@@ -17,6 +18,8 @@
         {
             <CascadingValue Value="this"><QuoteComponent @bind-ShowArea="showInput" /></CascadingValue>
         }
+
+
     </div>
 
     <div class="table-responsive">
@@ -30,14 +33,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var quote in quotes)
+                @if (quotes.Any())
                 {
-                    <tr>
-                        <th>@quote.Content</th>
-                        <td>@quote.AuthorName</td>
-                        <td>@quote.BookTitle</td>
-                        <td>@quote.DateCreated.Date.ToString("d")</td>
-                    </tr>
+                    @foreach (var quote in quotes)
+                    {
+                        <tr>
+                            <th>@quote.Content</th>
+                            <td>@quote.AuthorName</td>
+                            <td>@quote.BookTitle</td>
+                            <td>@quote.DateCreated.Date.ToString("d")</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
@@ -46,7 +52,8 @@
 
 @code{
     private bool showInput = false;
-    private IEnumerable<QuoteDto> quotes = Enumerable.Empty<QuoteDto>();
+    private IEnumerable<QuoteDto> quotes { get; set; } = new List<QuoteDto>();
+    private int Count { get; set; }
 
     public async Task RerenderTable()
     {
@@ -61,8 +68,13 @@
 
     private async Task LoadQuotes()
     {
-
-        quotes = await Client.GetForUserAsync();
+        var queryParams = new PageParameters()
+        {
+            PageNumber = 1
+        };
+        var result = await Client.GetForUserAsync(queryParams);
+        quotes = result.Items;
+        Count = result.TotalCount;
     }
 
     private void ShowInputForm()

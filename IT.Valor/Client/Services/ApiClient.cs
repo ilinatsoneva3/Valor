@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using IT.Valor.Common.Models.Index;
+using IT.Valor.Common.Models;
+using IT.Valor.Common.Models.Quote;
 using IT.Valor.Common.Services;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace IT.Valor.Client.Services
 {
@@ -28,15 +29,24 @@ namespace IT.Valor.Client.Services
             }
         }
 
-        public async Task<IEnumerable<QuoteDto>> GetForUserAsync()
+        public async Task<PaginatedResult<QuoteDto>> GetForUserAsync(PageParameters parameters)
         {
             try
             {
-                return await _httpClient.GetAsync<IEnumerable<QuoteDto>>($"api/quotes/all");
+                var queryStringParam = new Dictionary<string, string>
+                {
+                    ["pageNumber"] = parameters.PageNumber.ToString()
+                };
+
+                var uri = QueryHelpers.AddQueryString("api/quotes/all", queryStringParam);
+
+                var result =  await _httpClient.GetAsync<PaginatedResult<QuoteDto>>($"{uri}");
+                return result;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Enumerable.Empty<QuoteDto>();
+
+                return new PaginatedResult<QuoteDto>();
             }
         }
 
