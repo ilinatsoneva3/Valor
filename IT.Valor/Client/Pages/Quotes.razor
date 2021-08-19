@@ -18,47 +18,87 @@
         {
             <CascadingValue Value="this"><QuoteComponent @bind-ShowArea="showInput" /></CascadingValue>
         }
-
-
     </div>
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Quote</th>
-                    <th scope="col">Author Name</th>
-                    <th scope="col">Book Title</th>
-                    <th scope="col">Date Added</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (quotes.Any())
-                {
-                    @foreach (var quote in quotes)
+    @if (Response.Items.Any())
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Quote</th>
+                        <th scope="col">Author Name</th>
+                        <th scope="col">Book Title</th>
+                        <th scope="col">Date Added</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Response.Items.Any())
                     {
-                        <tr>
-                            <th>@quote.Content</th>
-                            <td>@quote.AuthorName</td>
-                            <td>@quote.BookTitle</td>
-                            <td>@quote.DateCreated.Date.ToString("d")</td>
-                        </tr>
+                        @foreach (var quote in Response.Items)
+                        {
+                            <tr>
+                                <th>@quote.Content</th>
+                                <td>@quote.AuthorName</td>
+                                <td>@quote.BookTitle</td>
+                                <td>@quote.DateCreated.Date.ToString("d")</td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" @onclick="GetPrevious">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link">@Response.CurrentPage</a></li>
+                    <li class="page-item">
+                        <a class="page-link" @onclick="GetNext">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    }
+    else
+    {
+        <div> Loading... </div>
+    }
+
 </div>
 
 @code{
     private bool showInput = false;
-    private IEnumerable<QuoteDto> quotes { get; set; } = new List<QuoteDto>();
-    private int Count { get; set; }
+
+    private PageParameters queryParams = new PageParameters();
+
+    [Parameter]
+    public PaginatedResult<QuoteDto> Response { get; set; } = new PaginatedResult<QuoteDto>();
 
     public async Task RerenderTable()
     {
         await LoadQuotes();
         StateHasChanged();
+    }
+
+    public async Task GetNext()
+    {
+        if (Response.HasNext)
+        {
+            queryParams.PageNumber++;
+            await LoadQuotes();
+            StateHasChanged();
+        }
+    }
+
+    public async Task GetPrevious()
+    {
+        if (Response.HasPrevious)
+        {
+            queryParams.PageNumber--;
+            await LoadQuotes();
+            StateHasChanged();
+        }
     }
 
     protected override async Task OnInitializedAsync()
@@ -68,13 +108,8 @@
 
     private async Task LoadQuotes()
     {
-        var queryParams = new PageParameters()
-        {
-            PageNumber = 1
-        };
         var result = await Client.GetForUserAsync(queryParams);
-        quotes = result.Items;
-        Count = result.TotalCount;
+        Response = result;
     }
 
     private void ShowInputForm()

@@ -6,13 +6,23 @@ namespace IT.Valor.Core.Common
 {
     public class PaginatedResult<T>
     {
-        public PaginatedResult(IEnumerable<T> items, int count)
+        public PaginatedResult(IEnumerable<T> items, int count, int totalPages, int currentPage)
         {
             Items = items;
             TotalCount = count;
+            TotalPages = totalPages;
+            CurrentPage = currentPage;
         }
 
+        public int TotalPages { get; set; }
+
         public int TotalCount { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public bool HasPrevious => CurrentPage > 1;
+
+        public bool HasNext => TotalPages > CurrentPage;
 
         public IEnumerable<T> Items { get; set; }
 
@@ -23,7 +33,9 @@ namespace IT.Valor.Core.Common
                 .Take(pageSize)
                 .ToList();
 
-            return new PaginatedResult<T>(items, count);
+            var totalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+            return new PaginatedResult<T>(items, count, totalPages, pageNumber);
         }
     }
 }
