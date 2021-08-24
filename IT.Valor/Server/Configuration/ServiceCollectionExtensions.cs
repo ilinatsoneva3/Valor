@@ -23,6 +23,7 @@ namespace IT.Valor.Server.Configuration
             services.AddScoped<IQuoteRepository, QuoteRepository>();
             services.AddScoped<IBaseRepository<Book>, BaseRepository<Book>>();
             services.AddScoped<IBaseRepository<Author>, BaseRepository<Author>>();
+            services.AddScoped<IUserLikedQuoteRepository, UserLikedQuoteRepository>();
         }
     }
 }

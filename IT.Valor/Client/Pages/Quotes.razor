@@ -38,12 +38,7 @@
                     {
                         @foreach (var quote in Response.Items)
                         {
-                            <tr>
-                                <th>@quote.Content</th>
-                                <td>@quote.AuthorName</td>
-                                <td>@quote.BookTitle</td>
-                                <td>@quote.DateCreated.Date.ToString("d")</td>
-                            </tr>
+                            <QuoteRowComponent Quote="@quote"></QuoteRowComponent>
                         }
                     }
                 </tbody>

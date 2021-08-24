@@ -1,0 +1,13 @@
+﻿@using IT.Valor.Common.Models.Quote
+
+<tr>
+    <th>@Quote.Content</th>
+    <td>@Quote.AuthorName</td>
+    <td>@Quote.BookTitle</td>
+    <td>@Quote.DateCreated.Date.ToString("d")</td>
+</tr>
+
+@code {
+    [Parameter]
+    public QuoteDto Quote { get; set; }
+}

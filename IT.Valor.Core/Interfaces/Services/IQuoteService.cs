@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using IT.Valor.Core.Common;
 using IT.Valor.Core.DataTransferObjects.Quotes;
 

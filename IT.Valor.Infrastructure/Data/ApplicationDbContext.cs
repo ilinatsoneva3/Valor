@@ -23,6 +23,8 @@ namespace IT.Valor.Infrastructure.Data
 
         public DbSet<Author> Author { get; set; }
 
+        public DbSet<UserLikedQuote> UserLikedQuotes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);

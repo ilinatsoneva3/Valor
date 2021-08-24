@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IT.Valor.Core.Interfaces.Entities;
 
 namespace IT.Valor.Core.Models
@@ -24,5 +25,7 @@ namespace IT.Valor.Core.Models
         public DateTime DateCreated { get; set; }
 
         public DateTime DateModified { get; set; }
+
+        public IEnumerable<UserLikedQuote> UserLikedQuotes { get; set; } = new HashSet<UserLikedQuote>();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Identity;
 
 namespace IT.Valor.Core.Models
@@ -11,5 +10,7 @@ namespace IT.Valor.Core.Models
         public string LastName { get; set; }
 
         public IEnumerable<Quote> Quotes { get; set; } = new HashSet<Quote>();
+
+        public IEnumerable<UserLikedQuote> LikedQuotes { get; set; } = new HashSet<UserLikedQuote>();
     }
 }

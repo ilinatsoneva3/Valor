@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using IT.Valor.Core.Interfaces.Entities;
 
 namespace IT.Valor.Core.Models
