@@ -35,7 +35,8 @@ namespace IT.Valor.Client.Services
             {
                 var queryStringParam = new Dictionary<string, string>
                 {
-                    ["pageNumber"] = parameters.PageNumber.ToString()
+                    ["pageNumber"] = parameters.PageNumber.ToString(),
+                    ["searchTerm"] = parameters.SearchTerm == null ? string.Empty : parameters.SearchTerm
                 };
 
                 var uri = QueryHelpers.AddQueryString("api/quotes/all", queryStringParam);

@@ -12,5 +12,7 @@ namespace IT.Valor.Core.Interfaces.Services
         Task<QuoteStatsOverviewDto> GetStatsAsync();
 
         Task<PaginatedResult<QuoteDto>> GetAllForUserAsync(PageParameters parameters);
+
+        Task<PaginatedResult<QuoteDto>> GetByAuthorNameAsync(PageParameters parameters);
     }
 }

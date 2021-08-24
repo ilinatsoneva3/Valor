@@ -8,6 +8,8 @@
 
         public int PageNumber { get; set; } = 1;
 
+        public string SearchTerm { get; set; } = string.Empty;
+
         public int PageSize
         {
             get => _pageSize;

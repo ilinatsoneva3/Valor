@@ -37,7 +37,14 @@ namespace IT.Valor.Server.Controllers
         public async Task<QuoteDto> CreateQuoteAsync([FromBody] CreateQuoteDto request)
         {
             var result = await _quoteService.CreateQuoteAsync(request);
+            return result;
+        }
 
+        [HttpGet]
+        [Route("search")]
+        public async Task<PaginatedResult<QuoteDto>> GetByAuthorAsync([FromQuery] PageParameters parameters)
+        {
+            var result = await _quoteService.GetByAuthorNameAsync(parameters);
             return result;
         }
     }

@@ -19,6 +19,7 @@
             <CascadingValue Value="this"><QuoteComponent @bind-ShowArea="showInput" /></CascadingValue>
         }
     </div>
+    <SearchComponent OnSearchChanged="SearchChanged"></SearchComponent>
 
     @if (Response.Items.Any())
     {
@@ -62,7 +63,7 @@
     }
     else
     {
-        <div> Loading... </div>
+        <p> Loading... </p>
     }
 
 </div>
@@ -115,5 +116,12 @@
     private void ShowInputForm()
     {
         showInput = !showInput;
+    }
+
+    private async Task SearchChanged(string searchTerm)
+    {
+        queryParams.SearchTerm = searchTerm;
+        await LoadQuotes();
+        StateHasChanged();
     }
 }

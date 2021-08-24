@@ -66,10 +66,9 @@ namespace IT.Valor.Core.Services
         {
             var currentUser = await _userService.GetCurrentUserAsync();
 
-            var quotes = await _quoteRepository.GetForUserWithRealtedAsync(currentUser.Id);
-            var quotesDto = quotes.Select(q => _mapper.Map<QuoteDto>(q));
+            var quotes = await _quoteRepository.GetForUserWithRealtedAsync(currentUser.Id, parameters.SearchTerm);
 
-            return PaginatedResult<QuoteDto>.ToPaginatedResult(quotesDto, parameters.PageNumber, parameters.PageSize);
+            return MapToDto(quotes, parameters);
         }
 
         public async Task<QuoteStatsOverviewDto> GetStatsAsync()
@@ -88,6 +87,12 @@ namespace IT.Valor.Core.Services
                 RandomQuote = _mapper.Map<QuoteDto>(allQuotes.OrderBy(x => rand.NextDouble()).First()),
                 UserRandomQuote = _mapper.Map<QuoteDto>(userQuotes?.OrderBy(x => rand.NextDouble()).First())
             };
+        }
+
+        public async Task<PaginatedResult<QuoteDto>> GetByAuthorNameAsync(PageParameters parameters)
+        {
+            var quotes = await _quoteRepository.FilterByAuthorNameAsync(parameters.SearchTerm);
+            return MapToDto(quotes, parameters);
         }
 
         private async Task<AuthorDto> GetAuthorAsync(CreateQuoteDto request)
@@ -129,6 +134,13 @@ namespace IT.Valor.Core.Services
             }
             var trimmedName = name.Trim();
             return StringHelper.FirstLetterToUpper(trimmedName);
+        }
+
+        private PaginatedResult<QuoteDto> MapToDto(IEnumerable<Quote> source, PageParameters parameters)
+        {
+            var quotesDto = source.Select(q => _mapper.Map<QuoteDto>(q));
+
+            return PaginatedResult<QuoteDto>.ToPaginatedResult(quotesDto, parameters.PageNumber, parameters.PageSize);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace IT.Valor.Core.Interfaces.Repositories
     {
         Task<IEnumerable<Quote>> GetAllWithRelatedAsync();
 
-        Task<IEnumerable<Quote>> GetForUserWithRealtedAsync(string userId);
+        Task<IEnumerable<Quote>> GetForUserWithRealtedAsync(string userId, string searchTerm);
+
+        Task<IEnumerable<Quote>> FilterByAuthorNameAsync(string searchTerm);
     }
 }
