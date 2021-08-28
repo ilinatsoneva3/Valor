@@ -176,27 +176,6 @@ namespace IT.Valor.Infrastructure.Migrations
                     b.ToTable("Quotes");
                 });
 
-            modelBuilder.Entity("IT.Valor.Core.Models.UserLikedQuote", b =>
-                {
-                    b.Property<Guid>("QuoteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("QuoteId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLikedQuotes");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -336,29 +315,8 @@ namespace IT.Valor.Infrastructure.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("IT.Valor.Core.Models.UserLikedQuote", b =>
-                {
-                    b.HasOne("IT.Valor.Core.Models.Quote", "Quote")
-                        .WithMany("UserLikedQuotes")
-                        .HasForeignKey("QuoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IT.Valor.Core.Models.ApplicationUser", "User")
-                        .WithMany("LikedQuotes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Quote");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("IT.Valor.Core.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("LikedQuotes");
-
                     b.Navigation("Quotes");
                 });
 
@@ -372,11 +330,6 @@ namespace IT.Valor.Infrastructure.Migrations
             modelBuilder.Entity("IT.Valor.Core.Models.Book", b =>
                 {
                     b.Navigation("Quotes");
-                });
-
-            modelBuilder.Entity("IT.Valor.Core.Models.Quote", b =>
-                {
-                    b.Navigation("UserLikedQuotes");
                 });
 #pragma warning restore 612, 618
         }

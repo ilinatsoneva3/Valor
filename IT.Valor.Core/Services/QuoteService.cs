@@ -17,18 +17,21 @@ namespace IT.Valor.Core.Services
     public class QuoteService : IQuoteService
     {
         private readonly IQuoteRepository _quoteRepository;
+        private readonly IUserLikedQuoteRepository _userLikedQuoteRepository;
         private readonly IAuthorService _authorService;
         private readonly IBookService _bookService;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
         public QuoteService(IQuoteRepository quoteRepository,
+            IUserLikedQuoteRepository userLikedQuoteRepository,
             IAuthorService authorService,
             IBookService bookService,
             IUserService userService,
             IMapper mapper)
         {
             _quoteRepository = quoteRepository;
+            _userLikedQuoteRepository = userLikedQuoteRepository;
             _authorService = authorService;
             _bookService = bookService;
             _userService = userService;
@@ -94,6 +97,43 @@ namespace IT.Valor.Core.Services
             var quotes = await _quoteRepository.FilterByAuthorNameAsync(parameters.SearchTerm);
             return MapToDto(quotes, parameters);
         }
+
+        #region UserLikedQuotes
+        public async Task CreateUserLikedQuote(Guid quoteId)
+        {
+            var currentUser = await _userService.GetCurrentUserAsync();
+
+            var quote = await _quoteRepository.FirstOrDefaultAsync(x => x.Id == quoteId);
+
+            if (quote is null)
+            {
+                throw new ArgumentException("There is no such quote");
+            }
+
+            var likedQuote = await _userLikedQuoteRepository.FirstOrDefaultAsync(ulq => ulq.QuoteId == quoteId && ulq.UserId == currentUser.Id);
+
+            if (likedQuote is not null)
+            {
+                throw new ArgumentException("Quote is already liked by current user");
+            }
+
+            var newQuote = new UserLikedQuote
+            {
+                QuoteId = quote.Id,
+                UserId = currentUser.Id
+            };
+
+            _userLikedQuoteRepository.Add(newQuote);
+            await _userLikedQuoteRepository.SaveChangesAsync();
+        }
+
+        public async Task<PaginatedResult<UserLikedQuoteDto>> GetUserLikedQuotes()
+        {
+            var currentUser = await _userService.GetCurrentUserAsync();
+            var result = await _userLikedQuoteRepository.GetByUserIdAsync(currentUser.Id);
+            throw new NotImplementedException();
+        }
+        #endregion
 
         private async Task<AuthorDto> GetAuthorAsync(CreateQuoteDto request)
         {
